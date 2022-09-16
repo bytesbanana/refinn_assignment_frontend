@@ -3,24 +3,31 @@ import { Box } from '@mui/system';
 import { useState } from 'react';
 import { ASSET_TYPES } from '../utils/constant';
 
-function valuetext(value) {
-  return `${value}°C`;
-}
-
-function valueLabelFormat(value) {
-  return new Intl.NumberFormat().format(value).toString();
-}
-
 const PRICE_RANGE_MIN = 100000;
 const PRICE_RANGE_MAX = 10000000;
 const PRICE_RANGE_STEP = 100000;
 
+const INITIAL_FORM = {
+  assetType: 'condo',
+  min: '',
+  max: '',
+};
+
 const SearchForm = ({ className }) => {
-  const [formData, setFormData] = useState({
-    assetType: null,
-    priceRange: [1000000, 5000000],
-  });
-  // const [priceRange, setPriceRange] = useState([1000000, 5000000]);
+  const [formData, setFormData] = useState(INITIAL_FORM);
+
+  const handleNumberInput = (e, fieldName) => {
+    const { value } = e.target;
+    if (parseInt(value, 10) <= 0) {
+      return '';
+    }
+
+    setFormData({
+      ...formData,
+      [fieldName]: +value,
+    });
+  };
+
   return (
     <Box className={`${className}`}>
       <FormControl fullWidth>
@@ -31,12 +38,13 @@ const SearchForm = ({ className }) => {
           labelId='assetType'
           id='demo-simple-select'
           label='Age'
-          onChange={(value) =>
+          onChange={(e) => {
+            const { value } = e.target;
             setFormData({
               ...formData,
               assetType: value,
-            })
-          }
+            });
+          }}
           value={formData.assetType}
         >
           {ASSET_TYPES.map(({ name, value }) => (
@@ -46,19 +54,35 @@ const SearchForm = ({ className }) => {
           ))}
         </Select>
       </FormControl>
-      <InputLabel id='priceRangeLabel' className='bg-white pr-1 font-medium'>
-        Price range
-      </InputLabel>
-      <Box className='flex gap-2'>
-        <TextField id='minPrice' label='Minimum' type='number' autoComplete='off' />
-        <TextField id='minPrice' label='Maximum' type='number' autoComplete='off' />
+      <Box>
+        <InputLabel id='priceRangeLabel' className='bg-white pr-1 font-medium'>
+          Price range
+        </InputLabel>
+        <Box className='flex gap-2'>
+          <TextField
+            id='minPrice'
+            label='Minimum'
+            type='number'
+            autoComplete='off'
+            value={formData.min <= 0 ? '' : formData.min}
+            onChange={(e) => handleNumberInput(e, 'min')}
+          />
+          <TextField
+            id='minPrice'
+            label='Maximum'
+            type='number'
+            autoComplete='off'
+            value={formData.max}
+            onChange={(e) => handleNumberInput(e, 'max')}
+          />
+        </Box>
       </Box>
 
       <Button variant='contained' className=' bg-blue-500'>
         Search
       </Button>
 
-      <Button variant='contained' className=' bg-red-300 hover:bg-red-700'>
+      <Button variant='contained' className=' bg-red-300 hover:bg-red-700' onClick={() => setFormData(INITIAL_FORM)}>
         Clear filter
       </Button>
     </Box>
