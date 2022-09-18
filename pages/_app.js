@@ -2,6 +2,8 @@ import { Link, StyledEngineProvider } from '@mui/material';
 import '../styles/globals.css';
 import Router, { useRouter } from 'next/router';
 import ProgressBar from '@badrap/bar-of-progress';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 const progress = new ProgressBar({
   size: 100,
@@ -13,6 +15,7 @@ const progress = new ProgressBar({
 Router.events.on('routeChangeStart', progress.start);
 Router.events.on('routeChangeComplete', progress.finish);
 Router.events.on('routeChangeError', progress.finish);
+dayjs.extend(relativeTime);
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
