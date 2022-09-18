@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ASSET_TYPES } from '../utils/constant';
 
 const INITIAL_FORM = {
-  assetType: ASSET_TYPES[0].value,
+  assetType: null,
   min: '',
   max: '',
   displayPerPage: 10,
@@ -44,9 +44,9 @@ const SearchForm = ({ className, onSearchClick }) => {
           }}
           value={formData.assetType}
         >
-          {ASSET_TYPES.map(({ name, value }) => (
-            <MenuItem key={value} value={value}>
-              {name}
+          {Object.keys(ASSET_TYPES).map((key) => (
+            <MenuItem key={key} value={key}>
+              {ASSET_TYPES[key]}
             </MenuItem>
           ))}
         </Select>

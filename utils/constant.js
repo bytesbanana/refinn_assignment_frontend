@@ -1,20 +1,13 @@
-const ASSET_TYPES = [
-  {
-    name: 'Condo',
-    value: 'CONDO',
-  },
-  {
-    name: 'House',
-    value: 'HOUSE',
-  },
-  {
-    name: 'Town House',
-    value: 'TOWNHOUSE',
-  },
-  {
-    name: 'Land',
-    value: 'LAND',
-  },
-];
+const ASSET_TYPES = {
+  CONDO: 'Condo',
+  HOUSE: 'House',
+  TOWNHOUSE: 'Town House',
+  LAND: 'Land',
+};
 
-export { ASSET_TYPES };
+const INPUT_ASSET_MODE = {
+  ADD: 'ADD',
+  EDIT: 'EDIT',
+};
+
+export { ASSET_TYPES, INPUT_ASSET_MODE };

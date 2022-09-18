@@ -1,10 +1,11 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Link, Typography } from '@mui/material';
 import dayjs from 'dayjs';
+import { ASSET_TYPES } from '../utils/constant';
 
 const AssetCard = ({ asset }) => {
   return (
-    <Card variant='outlined' className='md:max-w-[600px] xl:max-w-[500px]'>
-      <CardMedia component='img' className='max-h-[470px]' image={`${asset.imgUrl}`} alt='Paella dish' />
+    <Card variant='outlined' className='md:w-[600px] xl:w-[500px]'>
+      <CardMedia component='img' className='h-[300px]' image={`${asset.imgUrl}`} alt='Paella dish' />
       <CardContent>
         <Typography gutterBottom variant='h5' component='div'>
           {asset.title}
@@ -13,7 +14,7 @@ const AssetCard = ({ asset }) => {
           {asset.description}
         </Typography>
         <Typography variant='body2' color='text.secondary' className='line-clamp-2'>
-          {asset.description}
+          Type: {ASSET_TYPES[asset.assetType]}
         </Typography>
         <Typography variant='span' className='text-sm text-slate-500 text-end'>
           {`Listed on: ${dayjs().to(dayjs(asset.createdAt))}`}

@@ -3,13 +3,10 @@ import { Box, CircularProgress, Pagination } from '@mui/material';
 
 import SearchForm from '../components/SearchForm';
 import AssetCardList from '../components/AssetCardList';
+import LoaderCircle from '../components/LoaderCircle';
 import useIsMounted from '../hooks/useIsMounted';
+import AssetAPI from '../libs/api/AssetAPI';
 
-const LoaderCircle = () => (
-  <Box className='w-full h-[calc(100vh-48px)] flex justify-center items-center'>
-    <CircularProgress className='' size={100} />
-  </Box>
-);
 
 export default function HomePage() {
   const assetCardListHolderRef = useRef();
@@ -22,17 +19,10 @@ export default function HomePage() {
 
   const fetchAssets = async (page = 1, size = 10, min, max, assetType) => {
     setLoading(true);
-    let queryString = '';
-    if (min) queryString += `&min=${min}`;
-    if (max) queryString += `&max=${max}`;
-    if (assetType) queryString += `&assetType=${assetType}`;
-
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/assets?page=${page}&size=${size}${queryString}`);
-      if (!response.ok) return;
-      const data = await response.json();
-      setAssets(data.assets);
-      setTotalPage(data.totalPage);
+      const data = await AssetAPI.fetchAssets(page, size, min, max, assetType);
+      setAssets(data?.assets);
+      setTotalPage(data?.totalPage);
     } finally {
       setLoading(false);
     }
