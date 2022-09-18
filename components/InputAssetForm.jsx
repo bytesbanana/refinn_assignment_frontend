@@ -135,7 +135,7 @@ const InputAssetForm = ({
             }}
             className='w-full h-full'
             mapStyle='mapbox://styles/mapbox/streets-v9'
-            mapboxAccessToken='pk.eyJ1Ijoic2FoYXJhdHBheW5vayIsImEiOiJjbDg1MDA0dnkwaDJ3M3BwODcyaHFkZHozIn0.EFSADJ0GMfJVHzfVtHwtxg'
+            mapboxAccessToken={process.env.NEXT_PUBLIC_MAP_BOX_KEY}
             onClick={(e) => {
               setSelectedLocation({
                 latitude: e.lngLat.lat,
