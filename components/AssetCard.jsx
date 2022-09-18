@@ -1,8 +1,8 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Link, Typography } from '@mui/material';
 
-const AssetCard = () => {
+const AssetCard = ({ asset }) => {
   return (
-    <Card variant='outlined' className='md:max-w-[600px]'>
+    <Card variant='outlined' className='md:max-w-[600px] xl:max-w-[500px]'>
       <CardMedia
         component='img'
         className='max-h-[470px]'
@@ -11,18 +11,15 @@ const AssetCard = () => {
       />
       <CardContent>
         <Typography gutterBottom variant='h5' component='div'>
-          Title
+          {asset.title}
         </Typography>
         <Typography variant='body2' color='text.secondary' className='line-clamp-2'>
-          Culpa ullamco qui culpa aute dolor nisi aliquip laboris id amet pariatur. Consequat culpa proident fugiat
-          laborum. Non et id culpa eiusmod occaecat. Fugiat culpa consequat eiusmod non. Fugiat proident pariatur minim
-          culpa. Nulla dolore anim incididunt fugiat ex sint labore veniam minim in aute aliqua duis ad. Aliqua eu aute
-          do minim dolor qui dolor cillum ipsum sit ut Lorem.
+          {asset.description}
         </Typography>
       </CardContent>
 
       <CardActions>
-        <Link className='w-full' href='/assets/1'>
+        <Link className='w-full' href={`/assets/${asset?.id}`}>
           <Button size='small' variant='contained' className='w-full'>
             View details
           </Button>

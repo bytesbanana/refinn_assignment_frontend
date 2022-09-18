@@ -1,19 +1,19 @@
 const ASSET_TYPES = [
   {
     name: 'Condo',
-    value: 'condo',
+    value: 'CONDO',
   },
   {
     name: 'House',
-    value: 'house',
+    value: 'HOUSE',
   },
   {
     name: 'Town House',
-    value: 'townhouse',
+    value: 'TOWNHOUSE',
   },
   {
     name: 'Land',
-    value: 'land',
+    value: 'LAND',
   },
 ];
 

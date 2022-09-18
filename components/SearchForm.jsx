@@ -3,17 +3,14 @@ import { Box } from '@mui/system';
 import { useState } from 'react';
 import { ASSET_TYPES } from '../utils/constant';
 
-const PRICE_RANGE_MIN = 100000;
-const PRICE_RANGE_MAX = 10000000;
-const PRICE_RANGE_STEP = 100000;
-
 const INITIAL_FORM = {
-  assetType: 'condo',
+  assetType: ASSET_TYPES[0].value,
   min: '',
   max: '',
+  displayPerPage: 10,
 };
 
-const SearchForm = ({ className }) => {
+const SearchForm = ({ className, onSearchClick }) => {
   const [formData, setFormData] = useState(INITIAL_FORM);
 
   const handleNumberInput = (e, fieldName) => {
@@ -31,7 +28,7 @@ const SearchForm = ({ className }) => {
   return (
     <Box className={`${className}`}>
       <FormControl fullWidth>
-        <InputLabel id='assetTypeLabel' htmlFor='assetType' className='bg-white pr-1 font-medium'>
+        <InputLabel id='assetTypeLabel' htmlFor='assetType' className='pr-1 font-medium bg-white'>
           Asset type
         </InputLabel>
         <Select
@@ -54,8 +51,8 @@ const SearchForm = ({ className }) => {
           ))}
         </Select>
       </FormControl>
-      <Box>
-        <InputLabel id='priceRangeLabel' className='bg-white pr-1 font-medium'>
+      <Box className='flex flex-col gap-2'>
+        <InputLabel id='priceRangeLabel' className='pr-1 font-medium bg-white'>
           Price range
         </InputLabel>
         <Box className='flex gap-2'>
@@ -66,6 +63,7 @@ const SearchForm = ({ className }) => {
             autoComplete='off'
             value={formData.min <= 0 ? '' : formData.min}
             onChange={(e) => handleNumberInput(e, 'min')}
+            className='flex-1'
           />
           <TextField
             id='minPrice'
@@ -74,15 +72,41 @@ const SearchForm = ({ className }) => {
             autoComplete='off'
             value={formData.max}
             onChange={(e) => handleNumberInput(e, 'max')}
+            className='flex-1'
           />
         </Box>
       </Box>
 
-      <Button variant='contained' className=' bg-blue-500'>
+      <FormControl fullWidth className='mt-2'>
+        <InputLabel id='assetTypeLabel' htmlFor='assetType' className='pr-1 font-medium bg-white'>
+          Display asset per page
+        </InputLabel>
+        <Select
+          labelId='assetType'
+          id='demo-simple-select'
+          label='Display assets per page'
+          value={formData.displayPerPage}
+          onChange={(e) => {
+            const { value } = e.target;
+            setFormData({
+              ...formData,
+              displayPerPage: value,
+            });
+          }}
+        >
+          {[10, 20, 50].map((value) => (
+            <MenuItem key={value} value={value}>
+              {value}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <Button variant='contained' className='bg-blue-500' onClick={() => onSearchClick(formData)}>
         Search
       </Button>
 
-      <Button variant='contained' className=' bg-red-300 hover:bg-red-700' onClick={() => setFormData(INITIAL_FORM)}>
+      <Button variant='contained' className='bg-red-300 hover:bg-red-700' onClick={() => setFormData(INITIAL_FORM)}>
         Clear filter
       </Button>
     </Box>
