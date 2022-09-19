@@ -1,4 +1,5 @@
 const ASSET_TYPES = {
+  ALL: 'Any',
   CONDO: 'Condo',
   HOUSE: 'House',
   TOWNHOUSE: 'Town House',

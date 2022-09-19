@@ -1,9 +1,13 @@
 const AssetAPI = {
-  fetchAssets: async (page = 1, size = 10, min, max, assetType) => {
+  fetchAssets: async (page = 1, size = 10, min, max, assetType = '') => {
+    let tempAssetType = assetType;
+    if (assetType.toUpperCase("ANY")) {
+      tempAssetType = ''
+    }
     let queryString = '';
     if (min) queryString += `&min=${min}`;
     if (max) queryString += `&max=${max}`;
-    if (assetType) queryString += `&assetType=${assetType}`;
+    if (tempAssetType) queryString += `&assetType=${assetType}`;
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/assets?page=${page}&size=${size}${queryString}`);
     if (!response.ok) return;
