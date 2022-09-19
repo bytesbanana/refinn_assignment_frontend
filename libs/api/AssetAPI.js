@@ -1,7 +1,7 @@
 const AssetAPI = {
   fetchAssets: async (page = 1, size = 10, min, max, assetType = '') => {
     let tempAssetType = assetType;
-    if (assetType.toUpperCase("ANY")) {
+    if (assetType?.toUpperCase("ANY")) {
       tempAssetType = ''
     }
     let queryString = '';

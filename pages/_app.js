@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }) {
     <StyledEngineProvider injectFirst>
       <div className='flex items-center justify-between w-full h-12 shadow-md bg-sky-500 drop-shadow-md'>
         <Link href='/' className='no-underline'>
-          <div className='p-2 text-2xl font-bold text-white cursor-pointer'>Logo</div>
+          <div className='p-2 text-2xl font-bold text-white cursor-pointer'>Home</div>
         </Link>
         <ul className='flex gap-4 p-4'>
           {!router.pathname.includes('/admin') && (

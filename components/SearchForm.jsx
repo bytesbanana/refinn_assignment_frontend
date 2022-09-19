@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ASSET_TYPES } from '../utils/constant';
 
 const INITIAL_FORM = {
-  assetType: null,
+  assetType: 'ALL',
   min: '',
   max: '',
   displayPerPage: 10,

@@ -46,7 +46,6 @@ const ManageAssetPage = () => {
     try {
       const data = await AssetAPI.fetchAssets(page, size);
       setPaginateAssets(data);
-      console.log(data);
     } finally {
       setLoading(false);
     }
