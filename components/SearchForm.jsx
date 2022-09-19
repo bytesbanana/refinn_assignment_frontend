@@ -42,7 +42,7 @@ const SearchForm = ({ className, onSearchClick }) => {
               assetType: value,
             });
           }}
-          value={formData.assetType}
+          value={formData?.assetType || ' '}
         >
           {Object.keys(ASSET_TYPES).map((key) => (
             <MenuItem key={key} value={key}>
